@@ -275,7 +275,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: devmayank8/finvistanexus-configserver:5.1.0-SNAPSHOT
+    image: devmayank8/finvistanexus-configserver:6.0.0-SNAPSHOT
     container_name: fvn-configserver-ms
     ports:
       - "8071:8071"
@@ -293,7 +293,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: devmayank8/finvistanexus-eurekaserver:5.1.0-SNAPSHOT
+    image: devmayank8/finvistanexus-eurekaserver:6.0.0-SNAPSHOT
     container_name: fvn-eurekaserver-ms
     ports:
       - "8070:8070"
@@ -315,7 +315,7 @@ services:
       service: microservice-configserver-config
 
   accounts:
-    image: devmayank8/finvistanexus-accounts:5.1.0-SNAPSHOT
+    image: devmayank8/finvistanexus-accounts:6.0.0-SNAPSHOT
     container_name: fvn-accounts-ms
 #    ports:
 #      - "8080:8080"
@@ -345,7 +345,7 @@ services:
       service: microservice-eurekaserver-config
 
   loans:
-    image: devmayank8/finvistanexus-loans:5.1.0-SNAPSHOT
+    image: devmayank8/finvistanexus-loans:6.0.0-SNAPSHOT
     container_name: fvn-loans-ms
 #    ports:
 #      - "8090:8090"
@@ -372,7 +372,7 @@ services:
       service: microservice-eurekaserver-config
 
   cards:
-    image: devmayank8/finvistanexus-cards:5.1.0-SNAPSHOT
+    image: devmayank8/finvistanexus-cards:6.0.0-SNAPSHOT
     container_name: fvn-cards-ms
 #    ports:
 #      - "9000:9000"
@@ -399,7 +399,7 @@ services:
       service: microservice-eurekaserver-config
 
   message:
-    image: devmayank8/finvistanexus-message:5.1.0-SNAPSHOT
+    image: devmayank8/finvistanexus-message:6.0.0-SNAPSHOT
     container_name: fvn-message-ms
     environment:
       SPRING_APPLICATION_NAME: "message"
@@ -418,7 +418,7 @@ services:
       service: network-deploy-service
 
   gatewayserver:
-    image: devmayank8/finvistanexus-gatewayserver:5.1.0-SNAPSHOT
+    image: devmayank8/finvistanexus-gatewayserver:6.0.0-SNAPSHOT
     container_name: fvn-gatewayserver-ms
     ports:
       - "8072:8072"

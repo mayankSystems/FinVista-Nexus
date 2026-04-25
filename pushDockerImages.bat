@@ -6,7 +6,7 @@ set "USERNAME=devmayank8"
 
 REM Set the project and version and repository names
 set "PROJECT=finvistanexus"
-set "VERSION=5.1.0-SNAPSHOT"
+set "VERSION=6.0.0-SNAPSHOT"
 set "REPOSITORY1=configserver"
 set "REPOSITORY2=eurekaserver"
 set "REPOSITORY3=accounts"
