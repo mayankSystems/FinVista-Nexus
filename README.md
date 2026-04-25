@@ -105,7 +105,19 @@ mvn compile jib:dockerBuild
 
 ### Docker Commands
 
-- To generate the docker image using the Dockerfile created
+- To display the system wide information of the Docker installation.
+
+```shell
+docker info | more
+```
+
+- To build a docker image from `Dockerfile2` which is located in the current directory `.`
+
+```shell
+docker build . -f Dockerfile2 -t devmayank8/myApp
+```
+
+- To build a docker image from `Dockerfile` which is located in the current directory `.`
 
 ```shell
 docker build . -t devmayank8/finvistanexus-accounts:1.0.1-SNAPSHOT
@@ -161,6 +173,24 @@ docker pull devmayank8/finvistanexus-accounts:1.0.1-SNAPSHOT
 docker ps -a
 ```
 
+- To stop all the running containers in docker
+
+```shell
+docker stop $(docker ps -a -q)
+```
+
+- To remove all the containers in docker
+
+```shell
+docker rm $(docker ps -a -q)
+```
+
+- To remove all the images in docker
+
+```shell
+docker rmi $(docker images -q)
+```
+
 - To login into the docker hub container registry
 
 ```shell
@@ -183,6 +213,12 @@ docker history <image_name>
 
 ```shell
 docker rm <image_id>
+```
+
+- To remove all the dangling docker images
+
+```shell
+docker image prune -a
 ```
 
 - To follow the log output of a particular container
@@ -221,6 +257,60 @@ docker conatiner prune
 docker system prune
 ```
 
+- To display the disk usage info for the docker
+
+```shell
+docker system df
+```
+
+- To display the disk usage info for the docker along with breakdown
+
+```shell
+docker system df -v
+```
+
+- To list all the docker volumes on your system
+
+```shell
+docker volume ls
+```
+
+- To list all the docker networks on your system [3 n/ws : bridge (default), none and host]
+
+```shell
+docker network ls
+```
+
+- To inspect a particular network `bridge`
+
+```shell
+docker network inspect bridge
+```
+
+- To run a container `alpine-2` with `none` network and image as `alpine`
+
+```shell
+docker run --network=none --name alpine-2 alpine
+```
+
+- To run a MySQL container in the background with persistent storage, setting the root password, and naming the container `mysql-db`.
+
+```shell
+docker run -d -v /opt/data:/var/lib/mysql --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+```
+
+- Create a new network named `wp-mysql-network` using the `bridge` driver. Allocate subnet `182.18.0.1/24`. Configure Gateway `182.18.0.1`
+
+```shell
+docker network create --driver bridge --subnet 182.18.0.1/24 --gateway 182.18.0.1 wp-mysql-network
+```
+
+- To run a container named `webapp` from the `kodekloud/simple-webapp-mysql` image, setting environment variables for database connection, attaching it to the `wp-mysql-network` network, mapping host port 38080 to container port 8080, and linking it to the `mysql-db` container.
+
+```shell
+docker run -d -e DB_HOST=mysql-db -e DB_PASSWORD=db_pass123 --network=wp-mysql-network -p 38080:8080 --link mysql-db:mysql-db --name webapp kodekloud/simple-webapp-mysql
+```
+
 ### Docker Compose Commands
 
 - To start the containers using a `docker-compose.yml` file
@@ -242,6 +332,46 @@ docker-compose stop
 ```
 
 ---
+
+## Kubernetes Commands
+
+- NOTE: Make sure this path `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` is present/added in your system PATH variables of Windows machine.
+
+- Lists all the contexts available in your `kubeconfig` file. **Contexts** define _the cluster, user, and namespace_ to use for further kubectl commands.
+
+```shell
+kubectl config get-contexts
+```
+
+- Lists all the clusters defined in your `kubeconfig` file. **Clusters** are the _endpoints_ kubectl connects to for executing commands.
+
+```shell
+kubectl config get-clusters
+```
+
+- Switch the current context to <docker-desktop>. This is useful when you have multiple contexts and need to switch between them for different clusters or environments.
+
+```shell
+kubectl config use-context docker-desktop
+```
+
+- Creates and runs a new pod named `fvn-accounts` using the `devmayank8/finvistanexus-accounts:1.0.1-SNAPSHOT` image. The pod listens on port 8080.
+
+```shell
+kubectl run fvn-accounts --image=devmayank8/finvistanexus-accounts:1.0.1-SNAPSHOT --port=8080
+```
+
+- Displays information about the **Kubernetes cluster** and its version, along with the **Kubernetes API server** version.
+
+```shell
+kubectl cluster-info
+```
+
+- Displays information about the **nodes** in your **Kubernetes cluster**, including their status, roles, age, and version. Nodes are the physical or virtual machines that make up a Kubernetes cluster.
+
+```shell
+kubectl get nodes
+```
 
 ## Modifying Run/Debug Configurations using spring profiles
 
